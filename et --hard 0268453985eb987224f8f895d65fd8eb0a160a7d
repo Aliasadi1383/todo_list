@@ -1,0 +1,18 @@
+[33mcommit 0268453985eb987224f8f895d65fd8eb0a160a7d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: 9fd8a39 026efa5
+Author: Ali Asadi <aliasadi.012345678910@gmail.com>
+Date:   Sun Nov 23 01:51:48 2025 +0330
+
+    "Fix conflict: keep local version"
+
+[33mcommit 9fd8a396ac0e10601a601d84718edc8dada50b09[m
+Author: Ali Asadi <aliasadi.012345678910@gmail.com>
+Date:   Sun Nov 23 01:36:41 2025 +0330
+
+    create a project
+
+[33mcommit 026efa55bba070624593a39de71ed304f72085de[m
+Author: Ali asadi <aliasadi.012345678910@gmail.com>
+Date:   Sun Nov 23 01:32:30 2025 +0330
+
+    Initial commit
