@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo/add_task.dart';
+import 'package:todo/custom_widget_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,6 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  final ThemeData theme=Theme.of(context);
 
     return MaterialApp(
 
@@ -22,7 +25,9 @@ class MyApp extends StatelessWidget {
        ),
 
        textTheme: TextTheme(
-        bodyLarge: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)
+        bodyLarge: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontWeight: FontWeight.w600),
+        titleMedium: TextStyle(fontSize: 18,fontWeight: FontWeight.w700)
        ),
 
        cardTheme: CardThemeData(
@@ -32,10 +37,10 @@ class MyApp extends StatelessWidget {
        elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all(
-          Theme.of(context).colorScheme.primary
+          theme.colorScheme.primary
           ),
           foregroundColor: WidgetStateProperty.all(
-            Theme.of(context).colorScheme.onPrimary
+           theme.colorScheme.onPrimary
           ),
           minimumSize: WidgetStateProperty.all(
             Size(370, 50)
@@ -55,13 +60,15 @@ class TodoList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+      final ThemeData theme=Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-         title: Center(child:Text('My Todo List',style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          color: Theme.of(context).colorScheme.onPrimary
+         title: Center(child:Text('My Todo List',style: theme.textTheme.bodyLarge!.copyWith(
+          color:theme.colorScheme.onPrimary
          ),)),
         toolbarHeight: 100,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: theme.colorScheme.primary,
       ),
       
       body:Column(
@@ -87,9 +94,11 @@ class TodoList extends StatelessWidget{
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(onPressed: () {
-              
-            }, child: Text('Add New Task')),
+            child: button(Text('Add New Task',style: theme.textTheme.titleMedium!.copyWith(
+              color: theme.colorScheme.onPrimary
+            ),),() {
+              Navigator.push(context,MaterialPageRoute(builder: (context) => AddTask(),),);
+            },),
           )
         ],
       ),
