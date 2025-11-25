@@ -4,7 +4,7 @@ part 'task_model.g.dart';
 
  @HiveType(typeId:0)
 
- class TaskModel {
+ class TaskModel extends HiveObject {
 
   @HiveField(0)
 
@@ -12,7 +12,10 @@ part 'task_model.g.dart';
 
   @HiveField(1)
   int priority;
+  
+  @HiveField(2)
+  bool isSelected;
 
-  TaskModel({required this.text,required this.priority});
+  TaskModel({required this.text,required this.priority, this.isSelected=false});
 
  }

@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 
 class PrioritySelector extends StatefulWidget {
+  final int initalPriority;
   final Function(int) onPriorityChanged; 
-  const PrioritySelector({super.key,required this.onPriorityChanged});
+  const PrioritySelector({super.key,required this.onPriorityChanged,this.initalPriority=3});
 
   @override
   State<PrioritySelector> createState() => _PrioritySelector();
 }
 
 class _PrioritySelector extends State<PrioritySelector> {
-  int selector = 3;
-
+  late int selected;
+  
+  @override
+  void initState() {
+    super.initState();
+    selected=widget.initalPriority;
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -30,15 +36,15 @@ class _PrioritySelector extends State<PrioritySelector> {
     required Color color,
   }) {
 
-    bool isSelected=(selector==id);
+    bool isSelected=(selected==id);
 
     return InkWell(
       onTap: () {
         setState(() {
-          selector=id;
+          selected=id;
         });
 
-        widget.onPriorityChanged(selector);
+        widget.onPriorityChanged(selected);
       },
       child: Container(
          width: 120,

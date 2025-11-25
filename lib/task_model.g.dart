@@ -19,17 +19,20 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
     return TaskModel(
       text: fields[0] as String,
       priority: fields[1] as int,
+      isSelected: fields[2] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.text)
       ..writeByte(1)
-      ..write(obj.priority);
+      ..write(obj.priority)
+      ..writeByte(2)
+      ..write(obj.isSelected);
   }
 
   @override

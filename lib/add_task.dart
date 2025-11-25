@@ -5,7 +5,8 @@ import 'package:todo/priority_selector.dart';
 import 'package:todo/task_model.dart';
 
 class AddTask extends StatefulWidget {
-  const AddTask({super.key});
+  final TaskModel? task;
+  const AddTask({super.key,this.task});
 
   @override
   State<AddTask> createState() => _AddTask();
@@ -13,13 +14,25 @@ class AddTask extends StatefulWidget {
 
 class _AddTask extends State<AddTask> {
   TextEditingController textEditingController = TextEditingController();
+    late int selectedPriority;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.task != null) {
+    textEditingController.text = widget.task!.text;
+    selectedPriority = widget.task!.priority;
+  }else {
+    selectedPriority=3;
+  }
+  }
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     final box = Hive.box<TaskModel>('tasksBox');
 
-    int selectedPriority = 3;
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -49,6 +62,7 @@ class _AddTask extends State<AddTask> {
         child: Column(
           children: [
             PrioritySelector(
+              initalPriority: selectedPriority,
               onPriorityChanged: (p) {
                 selectedPriority = p;
               },
@@ -71,11 +85,17 @@ class _AddTask extends State<AddTask> {
                 ),
               ),
               () {
+                if (widget.task!=null) {
+                   widget.task!.text = textEditingController.text;
+                  widget.task!.priority = selectedPriority;
+                  widget.task!.save();
+                }else{
                 final task = TaskModel(
                   text: textEditingController.text,
                   priority: selectedPriority,
                 );
                 box.add(task);
+                }
                 Navigator.pop(context);
               },
             ),
