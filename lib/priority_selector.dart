@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PrioritySelector extends StatefulWidget {
-  const PrioritySelector({super.key});
+  final Function(int) onPriorityChanged; 
+  const PrioritySelector({super.key,required this.onPriorityChanged});
 
   @override
   State<PrioritySelector> createState() => _PrioritySelector();
@@ -36,6 +37,8 @@ class _PrioritySelector extends State<PrioritySelector> {
         setState(() {
           selector=id;
         });
+
+        widget.onPriorityChanged(selector);
       },
       child: Container(
          width: 120,
